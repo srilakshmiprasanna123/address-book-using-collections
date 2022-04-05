@@ -29,7 +29,7 @@ public class AddressBook {
                     while (condition1== true) {
                         System.out.println("1.add" +"\n" +"2.display"+ "\n" + "3.edit"+"\n" +"4.delete"+"\n"+"5.RemoveDuplicates"+"\n"+
                                 "6.SearchPerson in a city or State"+"\n"+"7.View Person By CityOrState"+"\n"
-                                +"8.Get a Cunt Of City or State"+"\n"+"9.sortWithPersonName"+"\n"+"10.exit");
+                                +"8.Get a Cunt Of City or State"+"\n"+"9.sortWithPersonName"+"\n"+"10.sortByCityStateZip"+"\n"+"11.exit");
                         int option = sc.nextInt();
                         switch (option) {
                             case 1:
@@ -64,6 +64,9 @@ public class AddressBook {
                                 addressBookList.sortWithPersonName();
                                 break;
                             case 10:
+                                addressBookList.sortByCityStateZip();
+                                break;
+                            case 11:
                                 condition1 = false;
                                 break;
                             default:
@@ -94,6 +97,11 @@ public class AddressBook {
                     System.out.println("Invalid Input");
             }
         }
+    }
+
+    public void sortByCityStateZip() {
+        List<Person> sortPersonByStateCityZip=adressBook.stream().sorted(Comparator.comparing(Person::getState).thenComparing(Person::getCity).thenComparing(Person::getZip)).collect(Collectors.toList());
+        System.out.println(sortPersonByStateCityZip);
     }
 
     public void sortWithPersonName() {
