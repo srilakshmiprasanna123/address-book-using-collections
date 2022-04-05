@@ -16,22 +16,53 @@ public class AddressBook {
         boolean condition = true;
 
         while (condition == true) {
-            System.out.println("1.add" +"\n" +"2.display"+ "\n" + "3.edit"+"\n" +"4.delete"+"\n" +"5.exit");
-            int option = sc.nextInt();
-            switch (option) {
+            System.out.println("Enter a options"+"\n"+"1.Do you want to continue in existing addressbook"+"\n"+"2.Create a new address book");
+            int options = sc.nextInt();
+            switch(options) {
                 case 1:
-                    addressBookList.addContactDetails();
+                    boolean condition1 = true;
+                    while ((condition1)== true) {
+                        System.out.println("1.add" +"\n" +"2.display"+ "\n" + "3.edit"+"\n" +"4.delete"+"\n" +"5.exit");
+                        int option = sc.nextInt();
+                        switch (option) {
+                            case 1:
+                                addressBookList.addContactDetails();
+                                break;
+                            case 2:
+                                addressBookList.display();
+                                break;
+                            case 3:
+                                addressBookList.editContactDetails();
+                                break;
+                            case 4:
+                                addressBookList.deleteContact();
+                                break;
+                            case 5:
+                                condition1 = false;
+                                break;
+                            default:
+                                System.out.println("Invalid Input");
+                        }
+                    }
                     break;
                 case 2:
-                    addressBookList.display();
-                    break;
-                case 3:
-                    addressBookList.editContactDetails();
-                    break;
-                case 4:
-                    addressBookList.deleteContact();
-                    break;
-                case 5:
+                    HashMap<String, ArrayList<Person>> map = new HashMap<>();
+                    ArrayList<Person> arrayList = new ArrayList<>();
+                    Person addessBook1=addressBoook;
+                    arrayList.add(addessBook1);
+                    map.put("Ram", arrayList);
+                    System.out.println(map);
+                    if (map.containsKey("Ram")) {
+                        ArrayList<Person> ram = map.get("Ram");
+                        Person addessBook2=addressBoook;
+                        ram.add(addessBook2);
+                        map.put("Ram", ram);
+                    }
+                    System.out.println(map);
+                    Person addessBook3=addressBoook;
+                    arrayList.add(addessBook3);
+                    map.put("Abhi", arrayList);
+                    System.out.println(map);
                     break;
                 default:
                     System.out.println("Invalid Input");
@@ -79,7 +110,7 @@ public class AddressBook {
         for(int i=0; i<adressBook.size(); i++) {
             if(adressBook.get(i).getFirstName().equals(editName)) {
                 System.out.println("select options");
-                System.out.println("\n0.First Name\n1.Last Name\n2.Address\n3.City\n4.State\n5.Zip\n6.Phone Number");
+                System.out.println("\n1.First Name\n2.Last Name\n3.Address\n4.City\n5.State\n6.Zip\n7.Phone Number\n8.Email");
                 int editOption=sc.nextInt();
 
                 switch(editOption) {
@@ -130,7 +161,7 @@ public class AddressBook {
         System.out.println("confirm the name to delete contact");
         String confirmName=sc.next();
         for (int i = 0; i < adressBook.size(); i++) {
-            if(adressBook.get(i).getFirstName().equals(confirmName));
+            if(adressBook.get(i).getFirstName().equalsIgnoreCase(confirmName));
             Person person = adressBook.get(i);
             adressBook.remove(person);
         }
