@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,7 +26,8 @@ public class AddressBook {
                 case 1:
                     boolean condition1 = true;
                     while (condition1== true) {
-                        System.out.println("1.add" +"\n" +"2.display"+ "\n" + "3.edit"+"\n" +"4.delete"+"\n"+"5.RemoveDuplicates"+"\n"+"6.SearchPerson in a city or State"+"\n"+"7.View Person By CityOrState"+"\n"+"8.exit");
+                        System.out.println("1.add" +"\n" +"2.display"+ "\n" + "3.edit"+"\n" +"4.delete"+"\n"+"5.RemoveDuplicates"+"\n"+
+                                "6.SearchPerson in a city or State"+"\n"+"7.View Person By CityOrState"+"\n"+"8.Get a Cunt Of City or State"+"\n"+"9.exit");
                         int option = sc.nextInt();
                         switch (option) {
                             case 1:
@@ -54,6 +56,9 @@ public class AddressBook {
                                 addressBookList.viewPersonByCityOrState();
                                 break;
                             case 8:
+                                addressBookList.getCountOfCityAndState();
+                                break;
+                            case 9:
                                 condition1 = false;
                                 break;
                             default:
@@ -86,10 +91,15 @@ public class AddressBook {
         }
     }
 
+
+        public void getCountOfCityAndState() {
+        Map<String, Map<String, Long>> people=adressBook.stream().collect(Collectors.groupingBy(Person::getCity, Collectors.groupingBy(Person::getState, Collectors.counting())));
+        System.out.println("After counting by city and state is:-"+people);
+    }
+
     public void viewPersonByCityOrState() {
         Map<String, Map<String, List<Person>>> people1=adressBook.stream().collect(Collectors.groupingBy(Person::getCity, Collectors.groupingBy(Person::getState)));
-        System.out.println("After grouping by city is:-"+people1);
-
+        System.out.println("After grouping by city and state is:-"+people1);
     }
 
     public void searchPersonInCityOrState(String city, String state) {
