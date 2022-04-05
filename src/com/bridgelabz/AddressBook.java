@@ -1,8 +1,10 @@
 package com.bridgelabz;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -23,7 +25,7 @@ public class AddressBook {
                 case 1:
                     boolean condition1 = true;
                     while (condition1== true) {
-                        System.out.println("1.add" +"\n" +"2.display"+ "\n" + "3.edit"+"\n" +"4.delete"+"\n"+"5.RemoveDuplicates"+"\n"+"6.SearchPerson in a city or State"+"\n"+"7.exit");
+                        System.out.println("1.add" +"\n" +"2.display"+ "\n" + "3.edit"+"\n" +"4.delete"+"\n"+"5.RemoveDuplicates"+"\n"+"6.SearchPerson in a city or State"+"\n"+"7.View Person By CityOrState"+"\n"+"8.exit");
                         int option = sc.nextInt();
                         switch (option) {
                             case 1:
@@ -49,6 +51,9 @@ public class AddressBook {
                                 addressBookList.searchPersonInCityOrState(city, state);
                                 break;
                             case 7:
+                                addressBookList.viewPersonByCityOrState();
+                                break;
+                            case 8:
                                 condition1 = false;
                                 break;
                             default:
@@ -79,6 +84,12 @@ public class AddressBook {
                     System.out.println("Invalid Input");
             }
         }
+    }
+
+    public void viewPersonByCityOrState() {
+        Map<String, Map<String, List<Person>>> people1=adressBook.stream().collect(Collectors.groupingBy(Person::getCity, Collectors.groupingBy(Person::getState)));
+        System.out.println("After grouping by city is:-"+people1);
+
     }
 
     public void searchPersonInCityOrState(String city, String state) {
